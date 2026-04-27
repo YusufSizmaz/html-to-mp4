@@ -10,7 +10,7 @@ export type EncoderOptions = {
 };
 
 /**
- * Spawns FFmpeg in image2pipe mode. Each PNG frame written to stdin
+ * Spawns FFmpeg in image2pipe mode. Each JPEG frame written to stdin
  * becomes one frame of the output MP4. Caller must end stdin when done.
  */
 export class FrameEncoder {
@@ -28,12 +28,13 @@ export class FrameEncoder {
         "-hide_banner",
         "-loglevel", "error",
         "-f", "image2pipe",
-        "-vcodec", "png",
+        "-vcodec", "mjpeg",
         "-framerate", String(fps),
         "-i", "-",
-        "-vf", `scale=${width}:${height}:flags=lanczos,format=yuv420p`,
+        "-vf", `scale=${width}:${height}:flags=bicubic,format=yuv420p`,
         "-c:v", "libx264",
-        "-preset", "slow",
+        "-preset", "veryfast",
+        "-tune", "zerolatency",
         "-crf", String(crf),
         "-movflags", "+faststart",
         "-r", String(fps),

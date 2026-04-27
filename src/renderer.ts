@@ -83,7 +83,8 @@ export class FrameRenderer {
     cdp.on("Page.screencastFrame", onScreencastFrame);
 
     await cdp.send("Page.startScreencast", {
-      format: "png",
+      format: "jpeg",
+      quality: 92,
       everyNthFrame: 1,
     });
 
@@ -98,13 +99,36 @@ export class FrameRenderer {
       const totalFrames = Math.round(durationSec * fps);
       const start = Date.now();
 
+      // Decouple sink writes from the sampling loop: writes are chained
+      // through a queue so encoder back-pressure never delays the next
+      // wall-clock sample. This preserves timing accuracy even when
+      // ffmpeg momentarily can't keep up.
+      let writeChain: Promise<void> = Promise.resolve();
+      let writeError: Error | null = null;
+      let written = 0;
+      const enqueue = (buf: Buffer, idx: number) => {
+        writeChain = writeChain.then(async () => {
+          if (writeError) return;
+          try {
+            await sink(buf);
+            written = idx + 1;
+            onProgress?.(written, totalFrames);
+          } catch (err) {
+            writeError = err as Error;
+          }
+        });
+      };
+
       for (let i = 0; i < totalFrames; i++) {
         const targetT = start + ((i + 1) / fps) * 1000;
         const wait = targetT - Date.now();
         if (wait > 0) await sleep(wait);
-        await sink(latest!);
-        onProgress?.(i + 1, totalFrames);
+        if (writeError) throw writeError;
+        enqueue(latest!, i);
       }
+
+      await writeChain;
+      if (writeError) throw writeError;
     } finally {
       cdp.off("Page.screencastFrame", onScreencastFrame);
       await cdp.send("Page.stopScreencast").catch(() => {});

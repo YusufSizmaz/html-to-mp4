@@ -134,6 +134,46 @@ window.addEventListener("drop", async (e) => {
 
 /* ---------- render ---------- */
 
+function disableDownload() {
+  els.download.setAttribute("aria-disabled", "true");
+  els.download.removeAttribute("download");
+  els.download.href = "#";
+}
+
+function enableDownload(href, filename) {
+  els.download.setAttribute("aria-disabled", "false");
+  els.download.href = href;
+  els.download.download = filename;
+}
+
+function setLoading(loading) {
+  els.render.dataset.loading = loading ? "true" : "false";
+  els.render.disabled = loading;
+  els.render.querySelector(".label").textContent = loading
+    ? "Rendering…"
+    : "Render to MP4";
+}
+
+function showStatus(state, text, done, total) {
+  els.status.hidden = false;
+  els.status.dataset.state = state;
+  const pct = total ? Math.min(100, (done / total) * 100) : state === "done" ? 100 : 0;
+  const pctLabel = total || state === "done" ? ` · ${pct.toFixed(0)}%` : "";
+  els.statusText.textContent = `${text}${pctLabel}`;
+  els.statusFrames.textContent = total ? `${done} / ${total} frames` : "";
+  els.barFill.style.width = `${pct}%`;
+}
+
+function labelFor(state) {
+  return {
+    queued: "Queued",
+    rendering: "Loading page in headless Chromium…",
+    encoding: "Recording at real time…",
+    done: "Ready.",
+    error: "Error",
+  }[state] ?? state;
+}
+
 els.render.addEventListener("click", async () => {
   const html = els.html.value.trim();
   if (!html) {
@@ -152,7 +192,7 @@ els.render.addEventListener("click", async () => {
 
   setLoading(true);
   showStatus("queued", "Submitting…", 0, 0);
-  els.download.hidden = true;
+  disableDownload();
 
   let jobId;
   try {
@@ -178,9 +218,7 @@ els.render.addEventListener("click", async () => {
     if (p.status === "done") {
       es.close();
       setLoading(false);
-      els.download.hidden = false;
-      els.download.href = `/api/jobs/${jobId}/download`;
-      els.download.download = `${jobId}.mp4`;
+      enableDownload(`/api/jobs/${jobId}/download`, `${jobId}.mp4`);
     } else if (p.status === "error") {
       es.close();
       setLoading(false);
@@ -193,29 +231,3 @@ els.render.addEventListener("click", async () => {
   };
 });
 
-function setLoading(loading) {
-  els.render.dataset.loading = loading ? "true" : "false";
-  els.render.disabled = loading;
-  els.render.querySelector(".label").textContent = loading
-    ? "Rendering…"
-    : "Render to MP4";
-}
-
-function showStatus(state, text, done, total) {
-  els.status.hidden = false;
-  els.status.dataset.state = state;
-  els.statusText.textContent = text;
-  els.statusFrames.textContent = total ? `${done} / ${total} frames` : "";
-  const pct = total ? Math.min(100, (done / total) * 100) : state === "done" ? 100 : 0;
-  els.barFill.style.width = `${pct}%`;
-}
-
-function labelFor(state) {
-  return {
-    queued: "Queued",
-    rendering: "Loading page in headless Chromium…",
-    encoding: "Recording at real time…",
-    done: "Ready.",
-    error: "Error",
-  }[state] ?? state;
-}

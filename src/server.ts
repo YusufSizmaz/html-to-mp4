@@ -1,6 +1,6 @@
 import { serve } from "@hono/node-server";
 import { serveStatic } from "@hono/node-server/serve-static";
-import { createReadStream, statSync } from "node:fs";
+import { readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import { Hono } from "hono";
 import { streamSSE } from "hono/streaming";
@@ -58,11 +58,12 @@ app.get("/api/jobs/:id/stream", (c) => {
     }
 
     await new Promise<void>((resolve) => {
+      let chain: Promise<unknown> = Promise.resolve();
       const onUpdate = (p: typeof job.progress) => {
-        void send("progress", p);
+        chain = chain.then(() => send("progress", p));
         if (p.status === "done" || p.status === "error") {
           job.listeners.delete(onUpdate);
-          resolve();
+          chain.finally(() => resolve());
         }
       };
       job.listeners.add(onUpdate);
@@ -74,15 +75,15 @@ app.get("/api/jobs/:id/stream", (c) => {
   });
 });
 
-app.get("/api/jobs/:id/download", (c) => {
+app.get("/api/jobs/:id/download", async (c) => {
   const job = getJob(c.req.param("id"));
   if (!job?.outputPath) return c.json({ error: "not ready" }, 404);
 
-  const stat = statSync(job.outputPath);
+  const [info, data] = await Promise.all([stat(job.outputPath), readFile(job.outputPath)]);
   c.header("Content-Type", "video/mp4");
-  c.header("Content-Length", String(stat.size));
+  c.header("Content-Length", String(info.size));
   c.header("Content-Disposition", `attachment; filename="${job.id}.mp4"`);
-  return c.body(createReadStream(job.outputPath) as unknown as ReadableStream);
+  return c.body(data);
 });
 
 function clamp(n: number, min: number, max: number): number {

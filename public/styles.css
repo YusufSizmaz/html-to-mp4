@@ -374,7 +374,7 @@ textarea#html:focus { border-color: var(--border-strong); }
 
 .download {
   display: inline-flex;
-  align-self: flex-start;
+  align-self: center;
   align-items: center;
   gap: 8px;
   background: var(--bg-input);
@@ -387,6 +387,11 @@ textarea#html:focus { border-color: var(--border-strong); }
   transition: all 120ms ease;
 }
 .download:hover { border-color: var(--accent); color: var(--accent); }
+.download[aria-disabled="true"] {
+  opacity: 0.45;
+  pointer-events: none;
+  cursor: not-allowed;
+}
 
 /* footer */
 .foot {
