@@ -1,7 +1,7 @@
 {
   "name": "html-to-mp4",
   "version": "0.1.0",
-  "description": "Render any HTML/CSS/JS page into a real-time, frame-accurate MP4 video. Headless Chromium → CDP screencast → FFmpeg.",
+  "description": "Free, open-source, self-hosted service that turns any HTML/CSS/JS page into a real-time, frame-accurate MP4 video. Drag-and-drop UI, three formats up to QHD, clean HTTP API. Powered by headless Chromium and FFmpeg. MIT licensed for personal and commercial use.",
   "type": "module",
   "license": "MIT",
   "author": {

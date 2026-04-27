@@ -27,6 +27,34 @@ pipes the stream straight into FFmpeg.
 
 ---
 
+## What is it?
+
+`html → mp4` is a free, self-hosted service that turns any HTML page —
+including its CSS animations, JavaScript-driven scenes, `<canvas>` art,
+SVG, web fonts, and embedded media — into a high-quality MP4 video file.
+
+Drop a `.html` file (or paste markup) into the web UI, choose an aspect
+ratio and duration, and get back a frame-accurate H.264 video where every
+animation plays at its natural, wall-clock speed. There's also a clean
+HTTP API for embedding the renderer in your own pipelines.
+
+**Built for:**
+
+- 🎞️  **Social content** — turn HTML mockups into Reels, Shorts, or TikToks
+- 📺  **Product demos & intros** — animated landing pages exported once, used everywhere
+- 📊  **Data viz** — D3, Chart.js, or Three.js scenes shareable as a clip
+- 🎨  **Banner-as-video** — render an animated ad once, ship it to any platform
+- 🪄  **Motion graphics** — CSS keyframes and Canvas animations as ready-to-publish video
+- 🤖  **Automated pipelines** — generate clips programmatically via the HTTP API
+- 📧  **Email previews** — MP4 thumbnails for inboxes that won't render rich HTML
+
+Because the renderer is a real headless Chromium browser, the output looks
+exactly like the page would in your browser — fonts, gradients, blend modes,
+WebGL, and all. There's no "approximation" of the layout; it's the actual
+browser output, captured frame by frame.
+
+---
+
 ## Free and open source — for everyone
 
 This project is released under the **MIT License**, which means it's free
@@ -69,6 +97,7 @@ how loaded the host is.
 
 ## Table of contents
 
+- [What is it?](#what-is-it)
 - [Free and open source — for everyone](#free-and-open-source--for-everyone)
 - [Features](#features)
 - [Quick start](#quick-start)
