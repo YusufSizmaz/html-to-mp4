@@ -1,0 +1,62 @@
+{
+  "name": "html-to-mp4",
+  "version": "0.1.0",
+  "description": "Render any HTML/CSS/JS page into a real-time, frame-accurate MP4 video. Headless Chromium → CDP screencast → FFmpeg.",
+  "type": "module",
+  "license": "MIT",
+  "author": {
+    "name": "CodynLab Dev",
+    "url": "https://codynlab.dev"
+  },
+  "homepage": "https://github.com/codynlab/html-to-mp4#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codynlab/html-to-mp4.git"
+  },
+  "bugs": {
+    "url": "https://github.com/codynlab/html-to-mp4/issues"
+  },
+  "keywords": [
+    "html-to-video",
+    "html-to-mp4",
+    "video",
+    "mp4",
+    "ffmpeg",
+    "puppeteer",
+    "chromium",
+    "headless",
+    "screencast",
+    "h264",
+    "hono",
+    "typescript",
+    "open-source"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "dist",
+    "public",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/server.js",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist output",
+    "docker:build": "docker build -t codynlab/html-to-mp4 .",
+    "docker:run": "docker run --rm -p 3000:3000 -v $(pwd)/output:/app/output codynlab/html-to-mp4"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.13.7",
+    "hono": "^4.6.14",
+    "puppeteer": "^23.10.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

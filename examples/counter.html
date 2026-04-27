@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Real-time counter · html→mp4 example</title>
+    <style>
+      :root { color-scheme: dark; }
+      body {
+        margin: 0;
+        height: 100vh;
+        display: grid;
+        place-items: center;
+        background: #050507;
+        font-family: ui-monospace, "SF Mono", Menlo, monospace;
+        color: #a3e635;
+      }
+      .stack { text-align: center; }
+      .num {
+        font-size: 240px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        line-height: 1;
+        text-shadow: 0 0 40px rgba(163, 230, 53, 0.3);
+      }
+      .label {
+        margin-top: 24px;
+        font-size: 16px;
+        color: #6b6b75;
+        letter-spacing: 0.4em;
+        text-transform: uppercase;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stack">
+      <div class="num" id="t">0.0</div>
+      <div class="label">elapsed seconds</div>
+    </div>
+    <script>
+      const el = document.getElementById("t");
+      const start = performance.now();
+      (function tick() {
+        const s = (performance.now() - start) / 1000;
+        el.textContent = s.toFixed(1);
+        requestAnimationFrame(tick);
+      })();
+    </script>
+  </body>
+</html>

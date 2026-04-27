@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Canvas wave · html→mp4 example</title>
+    <style>
+      :root { color-scheme: dark; }
+      html, body { margin: 0; padding: 0; background: #050507; overflow: hidden; }
+      canvas { display: block; width: 100vw; height: 100vh; }
+    </style>
+  </head>
+  <body>
+    <canvas id="c"></canvas>
+    <script>
+      const c = document.getElementById("c");
+      const ctx = c.getContext("2d");
+      function resize() { c.width = innerWidth; c.height = innerHeight; }
+      resize();
+      addEventListener("resize", resize);
+
+      const start = performance.now();
+      (function frame() {
+        const t = (performance.now() - start) / 1000;
+        const { width: w, height: h } = c;
+        ctx.clearRect(0, 0, w, h);
+
+        const lines = 24;
+        for (let i = 0; i < lines; i++) {
+          const phase = (i / lines) * Math.PI * 2;
+          ctx.beginPath();
+          ctx.lineWidth = 1.5;
+          ctx.strokeStyle = `hsla(${(t * 30 + i * 12) % 360}, 75%, 60%, 0.6)`;
+
+          for (let x = 0; x <= w; x += 4) {
+            const y =
+              h / 2 +
+              Math.sin(x / 80 + t * 1.2 + phase) * (60 + i * 4) +
+              Math.cos(x / 200 - t * 0.6) * 30;
+            x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+          }
+          ctx.stroke();
+        }
+
+        requestAnimationFrame(frame);
+      })();
+    </script>
+  </body>
+</html>

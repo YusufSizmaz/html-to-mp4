@@ -1,0 +1,45 @@
+name: 💡 Feature request
+description: Suggest an idea or enhancement.
+title: "feat: "
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We try to keep this project small and focused. Before opening,
+        please skim the README's Roadmap and the Limitations section.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Describe the use case rather than the implementation.
+      placeholder: I want to render vertical reels with a specific safe-area…
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Optional — sketch the API or UX you have in mind.
+    validations:
+      required: false
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: What workarounds have you tried? Why aren't they enough?
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      options:
+        - label: This stays within "small, focused, embeddable HTML-to-video service"
+          required: true
+        - label: I'm willing to help work on it (PRs welcome!)
+          required: false

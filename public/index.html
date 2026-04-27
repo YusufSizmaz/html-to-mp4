@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <title>html → mp4 · CodynLab Dev</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ctext y='14' font-size='14'%3E🎬%3C/text%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hero">
+        <div class="brand-row">
+          <div class="brand">
+            <span class="dot"></span>
+            <span class="brand-name">html<span class="brand-arrow">→</span>mp4</span>
+          </div>
+          <a class="lab" href="#" tabindex="-1">
+            <span class="lab-by">by</span>
+            <span class="lab-name">CodynLab Dev</span>
+          </a>
+        </div>
+
+        <h1>Render any HTML into a real-time MP4 video.</h1>
+        <p class="lede">
+          Headless Chromium streams the page over Chrome DevTools Protocol;
+          frames are sampled at your target rate and piped straight into
+          FFmpeg. Animations play at their natural speed — no fast-forward,
+          no jitter, frame-accurate output.
+        </p>
+      </header>
+
+      <section class="card">
+        <div class="row-between">
+          <span class="section-label">Source</span>
+          <div class="source-actions">
+            <button class="ghost" id="sample" type="button">load sample</button>
+            <button class="ghost" id="pick" type="button">↑ choose .html</button>
+            <input id="file" type="file" accept=".html,.htm,text/html" hidden />
+          </div>
+        </div>
+
+        <div class="drop" id="drop">
+          <textarea
+            id="html"
+            spellcheck="false"
+            placeholder="<!doctype html>&#10;<html>&#10;  <!-- paste your markup, drop a .html file, or click choose .html -->&#10;</html>"
+          ></textarea>
+          <div class="drop-overlay" aria-hidden="true">
+            <div class="drop-hint">drop .html to load</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <span class="section-label">Format</span>
+        <div class="formats" role="radiogroup" aria-label="aspect ratio">
+          <button class="fmt" data-aspect="landscape" role="radio" aria-checked="true" type="button">
+            <svg viewBox="0 0 32 24" class="fmt-icon"><rect x="2" y="6" width="28" height="14" rx="2"/></svg>
+            <span class="fmt-name">Landscape</span>
+            <span class="fmt-ratio">16 : 9</span>
+          </button>
+          <button class="fmt" data-aspect="portrait" role="radio" aria-checked="false" type="button">
+            <svg viewBox="0 0 24 32" class="fmt-icon"><rect x="6" y="2" width="14" height="28" rx="2"/></svg>
+            <span class="fmt-name">Portrait</span>
+            <span class="fmt-ratio">9 : 16</span>
+          </button>
+          <button class="fmt" data-aspect="square" role="radio" aria-checked="false" type="button">
+            <svg viewBox="0 0 24 24" class="fmt-icon"><rect x="4" y="4" width="18" height="18" rx="2"/></svg>
+            <span class="fmt-name">Square</span>
+            <span class="fmt-ratio">1 : 1</span>
+          </button>
+        </div>
+
+        <div class="settings">
+          <label class="field">
+            <span>Quality</span>
+            <select id="quality">
+              <option value="720">HD · 720</option>
+              <option value="1080" selected>Full HD · 1080</option>
+              <option value="1440">QHD · 1440</option>
+            </select>
+            <em class="hint" id="resolution-hint">1920 × 1080</em>
+          </label>
+
+          <label class="field">
+            <span>Duration</span>
+            <div class="input-suffix">
+              <input id="duration" type="number" min="1" max="60" step="1" value="5" />
+              <em>sec</em>
+            </div>
+          </label>
+
+          <label class="field">
+            <span>Frame rate</span>
+            <select id="fps">
+              <option value="24">24 fps</option>
+              <option value="30" selected>30 fps</option>
+              <option value="60">60 fps</option>
+            </select>
+          </label>
+        </div>
+
+        <button class="primary" id="render" type="button">
+          <span class="label">Render to MP4</span>
+          <span class="spinner" aria-hidden="true"></span>
+        </button>
+      </section>
+
+      <section class="card status" id="status" hidden>
+        <div class="status-row">
+          <span class="status-text" id="status-text">Submitting…</span>
+          <span class="status-frames" id="status-frames"></span>
+        </div>
+        <div class="bar"><div class="bar-fill" id="bar-fill"></div></div>
+        <a class="download" id="download" href="#" hidden>↓ download mp4</a>
+      </section>
+
+      <footer class="foot">
+        <span>Built with Puppeteer · FFmpeg · Hono</span>
+        <span class="dotsep">·</span>
+        <span>CodynLab Dev © 2026</span>
+      </footer>
+    </main>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

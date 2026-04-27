@@ -1,0 +1,21 @@
+services:
+  html-to-mp4:
+    build: .
+    image: codynlab/html-to-mp4:latest
+    container_name: html-to-mp4
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+    volumes:
+      - ./output:/app/output
+    # Chromium needs SYS_ADMIN to enable user namespaces — if you'd rather
+    # run truly unprivileged, drop this and switch to --no-sandbox in the
+    # renderer (already enabled).
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - seccomp:unconfined
+    init: true

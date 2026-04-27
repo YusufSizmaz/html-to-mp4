@@ -1,0 +1,82 @@
+name: 🐛 Bug report
+description: Report something that isn't working as expected.
+title: "bug: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a report. Please fill in as much
+        of the form as you can — reproduction steps and a minimal HTML
+        payload help us fix things faster.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: A clear and concise description of the bug.
+      placeholder: When I render this page, the output video shows…
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+      placeholder: I expected the video to…
+    validations:
+      required: true
+
+  - type: textarea
+    id: payload
+    attributes:
+      label: Minimal HTML payload
+      description: The smallest piece of HTML that reproduces the issue.
+      render: html
+    validations:
+      required: false
+
+  - type: input
+    id: settings
+    attributes:
+      label: Render settings
+      placeholder: "duration: 5s, fps: 30, format: landscape, quality: 1080"
+    validations:
+      required: false
+
+  - type: input
+    id: version
+    attributes:
+      label: Version / commit SHA
+      placeholder: "v0.1.0 or 1a2b3c4"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: install
+    attributes:
+      label: How are you running it?
+      options:
+        - Local (npm run dev)
+        - Local (npm start)
+        - Docker
+        - Custom deployment
+    validations:
+      required: true
+
+  - type: input
+    id: platform
+    attributes:
+      label: OS / Node / FFmpeg versions
+      placeholder: "macOS 14.5 · Node 20.11 · FFmpeg 6.1"
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Paste any relevant server output or browser console errors.
+      render: shell
+    validations:
+      required: false
