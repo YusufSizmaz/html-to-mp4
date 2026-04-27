@@ -3,6 +3,10 @@
 Self-contained HTML files you can drop straight into the `html → mp4` UI to
 verify the pipeline end-to-end.
 
+Like the rest of the project, every file in this folder is **MIT-licensed and
+free for anyone to use, modify, remix, or ship** — in personal experiments,
+open-source forks, or commercial products. No attribution required.
+
 | File | What it shows |
 |---|---|
 | [`counter.html`](counter.html) | A `performance.now()` based real-time clock — the easiest way to confirm the renderer captures at wall-clock speed. |

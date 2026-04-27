@@ -1,9 +1,14 @@
 # Contributing to `html → mp4`
 
-Thanks for taking an interest — this project is **open source** and we welcome
+Thanks for taking an interest. This is a **free and open-source** project,
+released under the MIT license, and **anyone is welcome to contribute** —
+whether it's your first open-source PR or your thousandth. We welcome
 contributions of every shape: bug reports, fixes, performance work, examples,
-docs, and ideas. The goal is a small, focused, dependable HTML-to-video
-pipeline; please keep that spirit in mind when proposing changes.
+docs, translations, and ideas.
+
+The goal is a small, focused, dependable HTML-to-video pipeline that stays
+free for everyone forever; please keep that spirit in mind when proposing
+changes.
 
 ## Ways to contribute
 
@@ -83,4 +88,6 @@ By participating, you agree to abide by our
 ## License
 
 By contributing, you agree that your work will be licensed under the project's
-[MIT License](LICENSE).
+[MIT License](LICENSE) — keeping the project free and open source for
+everyone, forever. There is **no Contributor License Agreement** to sign;
+your normal git commit metadata is enough.

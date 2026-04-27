@@ -8,7 +8,8 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [0.1.0] — 2026-04-28
 
-Initial public release.
+Initial public release — **free and open source under the MIT license**, free
+for anyone to use, modify, self-host, or embed in commercial products.
 
 ### Added
 

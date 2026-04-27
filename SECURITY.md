@@ -1,8 +1,10 @@
 # Security Policy
 
-We take the security of `html → mp4` seriously. Because this service spawns
-headless browsers and shells out to FFmpeg, the threat surface deserves
-careful attention — please report issues responsibly.
+`html → mp4` is a free, open-source project — but that doesn't mean security
+gets a backseat. Because the service spawns headless browsers and shells out
+to FFmpeg, the threat surface deserves careful attention. We take reports
+from anyone, regardless of whether you're a paying customer (you aren't —
+the project is free), a hobbyist, or a security researcher.
 
 ## Reporting a vulnerability
 

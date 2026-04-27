@@ -12,15 +12,30 @@ pipes the stream straight into FFmpeg.
 
 [![CI](https://img.shields.io/github/actions/workflow/status/codynlab/html-to-mp4/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/codynlab/html-to-mp4/actions)
 [![License: MIT](https://img.shields.io/badge/license-MIT-9a9aa3?style=flat-square)](LICENSE)
+[![Free & Open Source](https://img.shields.io/badge/free%20%26%20open%20source-a3e635?style=flat-square)](#license)
 [![Node](https://img.shields.io/badge/node-%E2%89%A520-3c873a?style=flat-square)](https://nodejs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?style=flat-square)](https://www.typescriptlang.org)
 [![Hono](https://img.shields.io/badge/Hono-4-ff6b35?style=flat-square)](https://hono.dev)
 [![FFmpeg](https://img.shields.io/badge/FFmpeg-libx264-007808?style=flat-square)](https://ffmpeg.org)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-a3e635?style=flat-square)](CONTRIBUTING.md)
 
-<sub>An open-source project by <strong>CodynLab Dev</strong> · MIT licensed · contributions welcome</sub>
+<sub><strong>100% free · open source · for everyone</strong></sub>
+
+<sub>An MIT-licensed project by <strong>CodynLab Dev</strong> — free to use for personal projects, client work, or commercial products. No fees, no "premium tier", no strings attached. Built in the open and maintained by the community.</sub>
 
 </div>
+
+---
+
+## Free and open source — for everyone
+
+This project is released under the **MIT License**, which means it's free
+for anyone to use, modify, self-host, embed in products, or ship in client
+work — personal or commercial, no permission required, no fee, no catch.
+The whole codebase lives in this repository; nothing is held back behind a
+"pro" version. Pull requests, issues, and ideas are welcome from anyone.
+
+> **TL;DR** — clone it, run it, ship it. Forever free, forever open.
 
 ---
 
@@ -54,6 +69,7 @@ how loaded the host is.
 
 ## Table of contents
 
+- [Free and open source — for everyone](#free-and-open-source--for-everyone)
 - [Features](#features)
 - [Quick start](#quick-start)
 - [Try the examples](#try-the-examples)
@@ -333,9 +349,21 @@ the repo a ⭐ — it really helps it find new contributors.
 
 [MIT](LICENSE) © **CodynLab Dev** and contributors.
 
-You're free to use, modify, and distribute this software under the terms of
-the MIT license. Forks and derivative works are encouraged — if you build
-something cool with it, we'd love to hear about it.
+This project is **free and open source — for everyone, forever**. Anyone —
+individuals, students, freelancers, agencies, startups, or large companies —
+can use, copy, modify, merge, publish, distribute, sublicense, and sell copies
+of the software, **including in commercial products**, under the permissive
+[MIT License](LICENSE).
+
+- ✅  No usage fees, ever
+- ✅  No "premium tier" or paywalled features
+- ✅  No "free for non-commercial only" clause
+- ✅  No CLA (Contributor License Agreement) to sign
+- ✅  No telemetry or tracking baked in
+- ✅  Fork it, rebrand it, ship it — all fine
+
+Forks and derivative works are encouraged. If you build something cool with
+it, we'd love to hear about it.
 
 ---
 
